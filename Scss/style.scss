@@ -1,0 +1,438 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: inline-block;
+}
+
+// animation
+
+@keyframes appearance {
+    0% {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// mixin start
+@mixin blockLayout {
+    display: inline-block;
+    width: 100%;
+    font-family: sans-serif
+}
+
+@mixin blockContent {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+@mixin tableOfContentsLocations {
+    font-size: 16px;
+    text-align: center;
+    width: 700px;
+    margin: 0 auto;
+}
+
+@mixin imgBeforeText {
+    display: inline-block;
+    content: "";
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+}
+
+@mixin footerButton {
+    cursor: pointer;
+    width: 250px;
+    height: 40px;
+    border: none;
+    font-size: 14px;
+    border-radius: 4px;
+    margin: 20px 0 20px 0;
+}
+
+// mixin end
+
+// Header start
+
+#header {
+    @include blockLayout();
+    background-color: #F8F9FA;
+    padding: 5px;
+    margin-bottom: 50px;
+    height: 165px;
+}
+
+#header-main-menu {
+    // div с выборам города.
+    @include blockContent();
+
+    .header-city-and-time {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #header-select-cites {
+            cursor: pointer;
+            border: none;
+            background-color: #DEE8FF;
+            color: #4E6BAD;
+            text-align: center;
+            border-radius: 5px;
+            width: 200px;
+            padding: 5px;
+            appearance: none;
+        }
+
+        
+    }
+
+
+    #header-search:not(.noscroll) {
+        @include blockContent();
+        animation: appearance 0.5s  ease-in-out;
+        position: fixed;
+        z-index: 2;
+        background-color: #F8F9FA;
+        top:0;
+        left: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #header-search {
+        // section Меню с логотипом, мессенджерами, поиском.
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0 10px 0;
+
+        .header-logo img {
+            // Фотография логотипа
+            height: 50px;
+            width: 150px;
+        }
+
+        .header-messengers img{
+            // Фотографии мессенджеров
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+            margin: 2px;
+        }
+        
+        .header-search-menu {
+            // section с полем поиска и кнопкой
+            $bgSearchMenu: #4E6BAD;
+
+            display: flex;
+            height: 30px;
+            justify-content: center;
+
+            .header-search-input {
+                // Поле поиска
+                border-radius: 3px 0 0 3px;
+                width: 450px;
+                border: 1px solid $bgSearchMenu;
+            }
+
+            .header-search-button {
+                // Кнопка поиска
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                background-color: $bgSearchMenu;
+                width: 100px;
+                border-radius: 0 3px 3px 0;
+                border: 1px solid $bgSearchMenu;
+                font-size: 12px;
+                font-weight: bold;
+                color: white;
+                cursor: pointer;
+                
+                img {
+                    // Картинка лупы на кнопки
+                    height: 15px;
+                    width: 15px;
+                }
+            }
+
+            .header-search-button:hover {
+                // Изменения цвета при на видении на кнопку
+                background-color: rgb(14, 14, 208);;
+            }
+        }
+
+
+        .header-communication-method {
+            // div с временем работы, номером телефона и адресом почты
+            $colorInform: #4E6BAD;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 80px;
+
+            .header-working-hours {
+                font-size: 14px;
+                color: $colorInform;
+            }
+
+            .header-mobile-number {
+                font-size: 20px;
+                font-weight: bold;
+                color: #001B5B;
+            }
+    
+            .header-mail {
+                color: $colorInform;
+                text-align: end;
+            }
+        }
+        
+    }
+
+    .header-demarcation-line {
+        // разделительная линия между header-search и nav-menu.
+        border: none;
+        height: 1px;
+        background-color: rgb(82, 82, 252);
+    }
+
+    #header-nav-menu {
+        // Навигационное меню
+        padding: 5px;
+        .header-nav-list {
+            // Список кнопок нав меню
+            display: flex;
+            justify-content: space-evenly;
+            list-style: none;
+            color: rgb(3, 3, 136);
+
+            .header-nav-item {
+                // Кнопка нав меню
+                cursor: pointer;
+                border-bottom: 1px solid transparent;
+            }
+
+            .header-nav-item:hover {
+                
+                border-bottom: 1px solid blue ;
+            }
+        }
+    }
+    
+}
+
+// Header end
+
+// Main start
+
+#main {
+    @include blockLayout();
+    padding: 5px;
+}
+
+#main-contants {
+    // Контент main
+    @include blockContent();
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .main-table-of-contents {
+        @include tableOfContentsLocations();
+        margin-bottom: 50px;
+    }
+
+    #main-welcome-screen {
+        // section в начале с фотогравией телефона
+        display: inline-block;
+        .main-welcome-screen-foto {
+            // figure где распологаеться фотография и кнопка
+            position: relative;
+            .main-welcome-screen-img {
+                width: 1000px;
+            }
+    
+            .main-welcome-screen-button {
+                position: absolute;
+                cursor: pointer;
+                bottom: 80px;
+                right: 150px;
+                border: none;
+                width: 200px;
+                height: 40px;
+                color: white;
+                font-size: 16px;
+                background-color: #FF0000;
+                border-radius: 10px;
+            }
+        }
+        
+    }
+
+    #main-our-clients {
+        // section с информацией о клиентах
+        display: inline-block;
+        width: 100%;
+
+        .main-our-clients-title {
+            @include tableOfContentsLocations();
+            margin-top: 80px;
+        }
+
+        .main-our-clients-inform {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 100px;
+            
+            .main-our-clients-statistics {
+                text-align: center;
+                width: 150px;
+
+                .statistics-title {
+                    color: #FF0000;
+                    font-weight: bold;
+                }
+                
+                .statistics-text {
+                    font-size: 16px;
+                }
+            }
+            
+        }
+
+        
+    }
+
+    #main-about-us {
+        // section с информацией о компании
+        display: inline-block;
+
+        .main-about-us-title {
+            @include tableOfContentsLocations()
+        }
+
+        .main-about-us-info {
+            // figure с фотографией сотрудников и описания компании.
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            .main-about-us-info-img {
+                width: 1000px;
+                height: 500px;
+            }
+
+            .main-about-us-info-text {
+                margin-top: 20px;
+                font-size: 14px;
+                
+                p {
+                    max-width: 1000px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        
+    }
+
+}
+
+// Main end
+
+// Footer star 
+
+#footer {
+    @include blockLayout();
+    padding: 5px;
+    background-color: #041741;
+}
+
+#footer-contend {
+    // контент footera
+    $colorInfoText: white;
+    @include blockContent();
+    display: grid;
+    grid-template-columns: 400px 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+
+    .footer-contact-us {
+        // Контактная информация
+        color: $colorInfoText;
+
+        .footer-contact-us-button {
+            @include footerButton();
+            background-color: #9C10E2;
+            color: $colorInfoText;
+        }
+
+        .footer-contact-us-number {
+            margin: 20px 0 20px 0;
+        }
+
+        .footer-contact-us-number::before {
+            @include imgBeforeText();
+            background-image: url("/Img/Footer/phone-call.png");
+        }
+
+        .footer-contact-us-mail {
+            margin: 20px 0 20px 0;
+        }
+
+        .footer-contact-us-mail::before {
+            @include imgBeforeText();
+            background-image: url("/Img/Footer/email.png");
+        }
+
+        .footer-contact-us-site-map, .footer-contact-us-terms-of-use {
+            margin: 20px 0 20px 0;
+            text-decoration: underline;
+        }
+    }
+
+    .footer-information-about-the-company {
+        // Информация о коммпании
+        color: $colorInfoText;
+
+        .footer-information-about-the-company-name {
+            margin: 20px 0 20px 0;
+        }
+
+        .footer-information-about-the-company-requisites {
+            margin: 5px 0 5px 0;
+        }
+
+        .footer-information-about-the-company-button {
+            @include footerButton();
+            background-color: #FF0000;
+            color: $colorInfoText;
+        }
+    }
+
+    .footer-copyright {
+        // информация о защите прав
+        text-align: center;
+        color: $colorInfoText;
+        grid-row: 2;
+        grid-column: 2 / span 3;
+    }
+}
+// Footer end
